@@ -1,11 +1,10 @@
 import { render } from 'preact';
 import { LocationProvider, Router, Route } from 'preact-iso';
+import './assets/styles/main.scss';
 
-import { Header } from './components/Header.jsx';
-import { Home } from './pages/Home/index.jsx';
-import { NotFound } from './pages/_404.jsx';
-import './style.css';
-import './assets/styles/index.scss';
+import { NotFound } from './pages/not-found.js';
+import { Home } from './pages/home.js';
+import { Header } from './components/Header.js';
 
 export function App() {
 	return (

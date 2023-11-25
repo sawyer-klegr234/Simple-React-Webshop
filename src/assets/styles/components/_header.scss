@@ -1,0 +1,25 @@
+@use '../abstracts/palette';
+
+.c-header {
+    background-color: palette.$blue-primary-dark;
+}
+
+.c-header__nav {
+    display: flex;
+}
+
+.c-header__nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 8px;
+    display: block;
+
+    &:not(:last-child) {
+        margin-right: 10px;
+    }
+
+    &--active {
+        background-color: palette.$blue-primary-medium-light;
+    }
+}

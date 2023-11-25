@@ -1,0 +1,11 @@
+// Generic - low specificity rulesets
+@use 'generic';
+
+// Components - complete chuncks of UI
+@use 'components';
+
+// Pages - individual pages
+@use 'pages'; 
+
+// Objects - common design patters (such as containers or layout)
+@use 'objects'; 
