@@ -8,6 +8,7 @@ import Logout from './pages/logout';
 import Header from './components/header';
 import NotFound from './pages/not-found';
 import Home from './pages/home';
+import config from './../config.json';
 
 const App = () => {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -33,9 +34,12 @@ const App = () => {
 
 			if (!authenticated) {
 				// Redirect to login if the user is not logged in. Would be nicer to do this with useNavigate,
-				// but it does not really matter as we will be redirected to Auth0, meaning a full page reload,
+				// but it does not really matter as we will be redirected to Auth0, meaning a full page reload
 				// is not that big of a deal. We can not use useNavigate as we are outside of a router.
 				window.location.href = "login";
+			} else {
+				const claims = await auth0.getIdTokenClaims();
+				const roles = claims[`${config.auth.namespace}/roles`];
 			}
 		};
 

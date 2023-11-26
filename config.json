@@ -1,0 +1,7 @@
+{
+    "auth": {
+        "domain": "dev-g1kt7aaq50wq7eqn.us.auth0.com",
+        "clientId": "JACdiyKMkI0Yxyb5DctyLKWdOIG8zhmV",
+        "namespace": "http://127.0.0.1:5173"
+    }
+}
