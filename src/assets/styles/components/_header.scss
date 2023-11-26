@@ -19,7 +19,7 @@
         margin-right: 10px;
     }
 
-    &--active {
+    &.active {
         background-color: palette.$blue-primary-medium-light;
     }
 }

@@ -1,18 +1,25 @@
-import { useLocation } from 'preact-iso';
+import { NavLink } from 'react-router-dom';
 
-export function Header() {
-	const { url } = useLocation();
+interface props {
+	isAuthenticated: boolean;
+}
+
+const Header = (props: props) => {
 
 	return (
-		<header class="c-header">
-			<nav class="c-header__nav o-container">
-				<a href="/" class={`c-header__nav-link ${url == '/' ? 'c-header__nav-link--active' : ""}`}>
-					Home
-				</a>
-				<a href="/404" class={`c-header__nav-link ${url == '/404' ? 'c-header__nav-link--active' : ""}`}>
-					404
-				</a>
+		<header className="c-header">
+			<nav className="c-header__nav o-container">
+				{props.isAuthenticated && <>
+					<NavLink to="/" className="c-header__nav-link">
+						Home
+					</NavLink>
+					<NavLink to="/logout" className="c-header__nav-link">
+						Logout
+					</NavLink>
+				</>}
 			</nav>
 		</header>
 	);
 }
+
+export default Header;

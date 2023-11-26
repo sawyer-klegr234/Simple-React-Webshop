@@ -1,4 +1,4 @@
-export function NotFound() {
+const NotFound = () => {
 	return (
 		<div class="c-not-found o-container">
 			<h1 class="c-not-found__heading">404: Not Found</h1>
@@ -7,3 +7,5 @@ export function NotFound() {
 		</div>
 	);
 }
+
+export default NotFound;

@@ -1,0 +1,19 @@
+@use './settings';
+
+@function needs-query($breakpoint) {
+	@return map-get(settings.$grid-breakpoints, $breakpoint) != 0;
+}
+
+@mixin breakpoint($breakpoint) {
+    @if not map-has-key(settings.$grid-breakpoints, $breakpoint) {
+		@error 'The following breakpoint was not found: #{$breakpoint}. Available breakpoints are: #{map-keys(settings.$grid-breakpoints)}.';
+    }
+    
+    @if needs-query($breakpoint) {
+        @media (min-width: map-get(settings.$grid-breakpoints, $breakpoint)) {
+            @content;
+        }
+    } @else {
+        @content;
+    }
+}
