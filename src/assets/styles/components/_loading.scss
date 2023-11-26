@@ -1,0 +1,15 @@
+@use '../abstracts/grid';
+
+.c-loading {
+    display: flex;
+    justify-content: center;
+}
+
+.c-loading__spinner {
+    margin-top: 20px;
+    width: 50px;
+
+    @include grid.breakpoint(md) {
+        width: 80px;
+    }
+}

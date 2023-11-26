@@ -10,11 +10,7 @@ const Login = () => {
     login();
   }, []);
 
-  return (
-    <div class="c-login o-container">
-      <p class="c-login__message">Redirecting to login...</p>
-    </div>
-  );
+  return <></>;
 };
 
 export default Login;

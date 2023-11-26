@@ -1,15 +1,13 @@
 import { NavLink } from 'react-router-dom';
+import { useAuth } from '../infrastructure/authContext';
 
-interface props {
-	isAuthenticated: boolean;
-}
-
-const Header = (props: props) => {
+const Header = () => {
+	const authContext = useAuth();
 
 	return (
 		<header className="c-header">
 			<nav className="c-header__nav o-container">
-				{props.isAuthenticated && <>
+				{authContext.isAuthenticated && <>
 					<NavLink to="/" className="c-header__nav-link">
 						Home
 					</NavLink>
