@@ -22,7 +22,16 @@
 }
 
 .c-button--unstyled {
+    font-size: 16px;
     border: none;
     background: none;
     padding: 0;
+}
+
+.c-button--link {
+    text-decoration: underline;
+
+    &:hover {
+        text-decoration: none;
+    }
 }

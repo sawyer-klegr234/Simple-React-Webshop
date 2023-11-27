@@ -13,10 +13,14 @@ import ProductGrid from './components/product-grid';
 import EditProductForm from './components/edit-product-form';
 import OrderList from './components/order-list';
 import './assets/styles/main.scss';
+import { Product } from './api/models/product';
+import { Order } from './api/models/order';
 
 const ActiveRoutes = () => {
 	const authContext = useAuth();
 	const [productSkusInCart, setProductSkusInCart] = useState<string[]>([]);
+	const [products, setProducts] = useState<Product[]>();
+	const [orders, setOrders] = useState<Order[]>();
 	const [toastMessage, setToastMessage] = useState<string>();
 	const [currentInterval, setCurrentInterval] = useState<NodeJS.Timeout>();
 
@@ -47,6 +51,19 @@ const ActiveRoutes = () => {
 		displayToast("Removed from cart!")
 	}
 
+	const updateProductState = (sku: string, product: Product) => {
+		setProducts(prevState => {
+			const indexOfItemToUpdate = prevState.findIndex(p => p.sku === sku);
+			const updated = [...prevState];
+
+			if (indexOfItemToUpdate !== -1) {
+				updated[indexOfItemToUpdate] = product;
+			}
+
+			return [...updated]
+		});
+	}
+
 	return <>
 		<Header countInCart={productSkusInCart.length} />
 		<main>
@@ -54,14 +71,25 @@ const ActiveRoutes = () => {
 				(<>
 					<Routes>
 						<Route path="/logout" element={<Logout />} />
-						<Route path='/' element={<ProductGrid onAddToCart={onAddToCart} />} />
+						<Route path='/' element={
+							<ProductGrid
+								onAddToCart={onAddToCart}
+								products={products}
+								setProducts={setProducts} />} />
 
 						<Route path='*' element={<NotFound />} />
 
 						{authContext.isAdmin ?
 							<>
-							<Route path="/edit/:sku" element={<EditProductForm />} />
-							<Route path="/orders" element={<OrderList />} />
+								<Route path="/edit/:sku" element={
+									<EditProductForm
+										updateProductState={updateProductState} />
+								} />
+								<Route path="/orders" element={
+									<OrderList
+										orders={orders}
+										setOrders={setOrders} />
+								} />
 							</>
 							:
 							<Route path='/cart' element={

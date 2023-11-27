@@ -78,12 +78,8 @@ if (existingProducts.length === 0) {
 }
 
 const getRandomTimeoutDuration = () => {
-    //don't want to wait during dev...
-    // return 1;
-
     return Math.floor(Math.random() * 2500) + 500;
 }
-
 
 export class ApiService {
     static getStoredOrders = () => {
@@ -141,7 +137,7 @@ export class ApiService {
         });
     }
     
-    static async updateProduct(sku: string, product: Product): Promise<Product[]> {
+    static async updateProduct(sku: string, product: Product): Promise<Product> {
         // Save order to local storage as we are not using a database
         const parsedProducts = this.getStoredProducts();
 
@@ -154,7 +150,7 @@ export class ApiService {
 
         return new Promise((resolve) => {
             setTimeout(() => {
-                resolve(parsedProducts);
+                resolve(product);
             }, getRandomTimeoutDuration());
         });
     }

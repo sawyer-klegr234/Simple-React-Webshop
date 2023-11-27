@@ -5,7 +5,11 @@ import { useState } from "preact/hooks";
 import { Product } from "../api/models/product";
 import Loading from "./loading";
 
-const EditProductForm = () => {
+interface Props {
+    updateProductState: (sku: string, product: Product) => void;
+}
+
+const EditProductForm = (props: Props) => {
     const { sku } = useParams();
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
@@ -40,8 +44,9 @@ const EditProductForm = () => {
         event.preventDefault();
 
         // Would check status/catch errors if this was a real api
-        await productsApi.updateProduct(sku, updatedProduct);
+        const response = await productsApi.updateProduct(sku, updatedProduct);
 
+        props.updateProductState(sku, response);
         navigate("../");
     };
 
@@ -102,7 +107,7 @@ const EditProductForm = () => {
                 </form>
         ) :
             <div class="c-edit-product-form__no-sku">
-                No Sku was provided. Please return to the <a class="c-edit-product-form__submitted-link" href="/">home page.</a>
+                No Sku was provided. Please return to the <button class="c-edit-product-form__home-button c-button--unstyled c-button--link" onClick={() => navigate("../")}>home page.</button>
             </div>
         }
     </div>

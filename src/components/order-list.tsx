@@ -4,19 +4,28 @@ import { Order } from "../api/models/order";
 import { useAsyncEffect } from "../infrastructure/asyncEffect";
 import Loading from "./loading";
 
-const OrderList = () => {
+interface Props {
+    setOrders: (orders: Order[]) => void;
+    orders: Order[];
+}
+
+const OrderList = (props: Props) => {
     const ordersApi = useOrdersApi();
-    const [orders, setOrders] = useState<Order[]>();
     const [expanded, setExpanded] = useState<number>();
 
     useAsyncEffect(async (cancelled) => {
+        // Store orders in the parent to prevent extra reloading
+        if(props.orders) {
+            return;
+        }
+
         const getProducts = await ordersApi.getOrders();
 
         if (cancelled()) {
             return;
         }
 
-        setOrders(getProducts);
+        props.setOrders(getProducts);
     }, []);
 
     const onExpandOrder = (index: number) => {
@@ -28,13 +37,13 @@ const OrderList = () => {
     }
 
     return <div class="c-orders-list o-container">
-        {orders ?
+        {props.orders ?
             <ul class="c-orders-list__list">
                 <li class="c-orders-list__item">
                     <h2 class="c-orders-list__item-heading">Orders:</h2>
-                    <div class="c-orders-list__item-heading-message">(click to toggle all details)</div>
+                    <div class="c-orders-list__item-heading-message">(click to view order details)</div>
                 </li>
-                {orders.map((o, i) =>
+                {props.orders.map((o, i) =>
                     <li class="c-orders-list__item">
                         <button class="c-orders-list__expand-button c-button--unstyled" onClick={() => onExpandOrder(i)}>
                             {o.firstName} {o.surname}

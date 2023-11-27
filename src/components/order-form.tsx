@@ -1,11 +1,13 @@
 import { useState } from "preact/hooks";
 import { Order } from "../api/models/order";
 import { useOrdersApi } from "../api/orders";
+import Loading from "./loading";
 
 interface Props {
     productSkusInCart: string[];
     emptyCart: () => void;
     setOrderSubmitted: (submitted: boolean) => void;
+    setLoading: (loading: boolean) => void;
 }
 
 const OrderForm = (props: Props) => {
@@ -24,6 +26,7 @@ const OrderForm = (props: Props) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        props.setLoading(true);
 
         const newOrder: Order = {
             firstName: formData.firstName,
@@ -43,45 +46,44 @@ const OrderForm = (props: Props) => {
 
         props.emptyCart();
         props.setOrderSubmitted(true);
+        props.setLoading(false);
     };
 
-    return (
-        <form class="c-order-form" onSubmit={handleSubmit}>
-            <label class="c-order-form__label">
-                First Name:
-                <input
-                    class="c-order-form__input"
-                    type="text"
-                    name="firstName"
-                    required
-                    value={formData.firstName}
-                    onChange={handleInputChange}
-                />
-            </label>
-            <label class="c-order-form__label">
-                Last Name:
-                <input
-                    class="c-order-form__input"
-                    type="text"
-                    name="surname"
-                    required
-                    value={formData.surname}
-                    onChange={handleInputChange}
-                />
-            </label>
-            <label class="c-order-form__label">
-                Email:
-                <input
-                    class="c-order-form__input"
-                    type="email"
-                    name="email"
-                    required
-                    value={formData.email}
-                    onChange={handleInputChange}
-                />
-            </label>
-            <button class="c-order-form__submit c-button" type="submit">Submit order</button>
-        </form>
-    );
+    return <form class="c-order-form" onSubmit={handleSubmit}>
+        <label class="c-order-form__label">
+            First Name:
+            <input
+                class="c-order-form__input"
+                type="text"
+                name="firstName"
+                required
+                value={formData.firstName}
+                onChange={handleInputChange}
+            />
+        </label>
+        <label class="c-order-form__label">
+            Last Name:
+            <input
+                class="c-order-form__input"
+                type="text"
+                name="surname"
+                required
+                value={formData.surname}
+                onChange={handleInputChange}
+            />
+        </label>
+        <label class="c-order-form__label">
+            Email:
+            <input
+                class="c-order-form__input"
+                type="email"
+                name="email"
+                required
+                value={formData.email}
+                onChange={handleInputChange}
+            />
+        </label>
+        <button class="c-order-form__submit c-button" type="submit">Submit order</button>
+    </form>
 }
 export default OrderForm;
