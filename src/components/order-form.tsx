@@ -1,7 +1,6 @@
 import { useState } from "preact/hooks";
 import { Order } from "../api/models/order";
 import { useOrdersApi } from "../api/orders";
-import Loading from "./loading";
 
 interface Props {
     productSkusInCart: string[];

@@ -123,7 +123,6 @@ const EditProductForm = (props: Props) => {
             </div>
         }
     </div>
-
 }
 
 export default EditProductForm;

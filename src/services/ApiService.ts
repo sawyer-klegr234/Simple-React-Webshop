@@ -69,7 +69,6 @@ const products: Product[] = [
 
 ];
 
-
 // If there are no stored products, save the "default" products
 const storedProducts = localStorage.getItem(LOCAL_STORAGE_PRODUCTS_KEY);
 const existingProducts = storedProducts ? JSON.parse(storedProducts) : [];
