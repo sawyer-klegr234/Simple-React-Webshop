@@ -1,6 +1,9 @@
 
 # Simple React Webshop
 
+### Assumptions
+The doc says under the "Admin" section "List carts of customers" and "View the details of a cart". I am assuming that rather than "carts", these should be submitted orders, as viewing active carts that have not been placed as a order does not make much sense, and it never says anything about viewing placed orders wich is implemented as part of the "Customer" section.
+
 ### Notes
 -	I used Preact/Vite to get up and running quickly as it is very light and quick to setup, and does not have any limitations that negatively will impact the project.
 -	I used npm-watch to for hot-reload during development.

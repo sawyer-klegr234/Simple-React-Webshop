@@ -11,6 +11,8 @@ import Loading from './components/loading';
 import { useState } from 'preact/hooks';
 import Toast from './components/toast';
 import Cart from './pages/cart';
+import EditProductForm from './components/edit-product-form';
+import EditProduct from './pages/edit-product';
 
 const ActiveRoutes = () => {
 	const authContext = useAuth();
@@ -53,13 +55,19 @@ const ActiveRoutes = () => {
 					<Routes>
 						<Route path="/logout" element={<Logout />} />
 						<Route path='/' element={<Home onAddToCart={onAddToCart} />} />
-						<Route path='/cart' element={
-							<Cart
-								productSkusInCart={productSkusInCart}
-								onRemoveFromCart={onRemoveFromCart}
-								emptyCart={() => setProductSkusInCart([])} />
-						} />
+
 						<Route path='*' element={<NotFound />} />
+
+						{authContext.isAdmin ?
+							<Route path="/edit/:sku" element={<EditProduct />} />
+							:
+							<Route path='/cart' element={
+								<Cart
+									productSkusInCart={productSkusInCart}
+									onRemoveFromCart={onRemoveFromCart}
+									emptyCart={() => setProductSkusInCart([])} />
+							} />
+						}
 					</Routes>
 					<Toast message={toastMessage} />
 				</>) :

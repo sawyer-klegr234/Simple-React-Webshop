@@ -19,6 +19,10 @@
     @include grid.breakpoint(xl) {
         width: 33%;
     }
+
+    .c-product-grid--list & {
+        width: 100%;
+    }
 }
 
 .c-product-grid__link {
@@ -40,6 +44,16 @@
     justify-content: space-between;
     width: 100%;
     margin-bottom: 6px;
+
+    .c-product-grid--list & {
+        justify-content: flex-start;
+    }
+}
+
+.c-product-grid__sku {
+    .c-product-grid--list & {
+        margin-right: 6px;
+    }
 }
 
 .c-product-grid__price {

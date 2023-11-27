@@ -16,9 +16,11 @@ const Header = (props: Props) => {
 						<NavLink to="/" className="c-header__nav-link">
 							Home
 						</NavLink>
-						<NavLink to="/cart" className="c-header__nav-link">
-							Cart {props.countInCart > 0 ? ` (${props.countInCart})` : ""}
-						</NavLink>
+						{!authContext.isAdmin &&
+							<NavLink to="/cart" className="c-header__nav-link">
+								Cart {props.countInCart > 0 ? ` (${props.countInCart})` : ""}
+							</NavLink>
+						}
 					</div>
 					<NavLink to="/logout" className="c-header__nav-link">
 						Logout

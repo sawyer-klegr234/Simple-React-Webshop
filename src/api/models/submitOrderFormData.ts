@@ -1,4 +1,4 @@
-export interface FormData {
+export interface SubmitOrderFormData {
     firstName: string;
     surname: string;
     email: string;

@@ -2,7 +2,7 @@
 @use '../abstracts/grid';
 
 
-.c-order-form {
+.c-edit-product-form {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -17,7 +17,7 @@
     }
 }
 
-.c-order-form__label {
+.c-edit-product-form__label {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -25,14 +25,31 @@
     font-weight: bold;
 }
 
-.c-order-form__input {
+.c-edit-product-form__input {
     padding: 6px;
     border: 1px solid palette.$gray-border;
     border-radius: 8px;;
     font-weight: normal;
 }
 
-.c-order-form__submit {
+.c-edit-product-form__price-container {
+    display: flex;
+    align-items: center;
+
+}
+
+.c-edit-product-form__price-symbol {
+    justify-self: flex-end;
+    font-weight: normal;
+    margin-right: 4px;
+}
+
+.c-edit-product-form__description {
+    flex-grow: 1;
+    margin-left: 10px;
+}
+
+.c-edit-product-form__submit {
     width: fit-content;
     margin-left: auto;
 }

@@ -1,6 +1,6 @@
 import { useState } from "preact/hooks";
-import { ProductService } from "../services/ProductService";
-import { FormData } from "../api/models/formData";
+import { SubmitOrderFormData } from "../api/models/submitOrderFormData";
+import { useOrdersApi } from "../api/orders";
 
 interface Props {
     productSkusInCart: string[];
@@ -9,8 +9,9 @@ interface Props {
 }
 
 const OrderForm = (props: Props) => {
+    const orderApi = useOrdersApi();
 
-    const [formData, setFormData] = useState<FormData>({
+    const [formData, setFormData] = useState<SubmitOrderFormData>({
         firstName: '',
         surname: '',
         email: '',
@@ -18,13 +19,13 @@ const OrderForm = (props: Props) => {
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-        setFormData({ ...formData, [name]: value });
+        setFormData(prevState => { return { ...prevState, [name]: value } });
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const newOrder: FormData = {
+        const newOrder: SubmitOrderFormData = {
             firstName: formData.firstName,
             surname: formData.surname,
             email: formData.email,
@@ -32,55 +33,55 @@ const OrderForm = (props: Props) => {
         };
 
         // Would check status/catch errors if this was a real api
-        await ProductService.submitOrder(newOrder);
+        await orderApi.submitOrder(newOrder);
 
         setFormData({
             firstName: '',
             surname: '',
             email: '',
         });
-        
+
         props.emptyCart();
         props.setOrderSubmitted(true);
     };
 
     return (
-            <form class="c-order-form" onSubmit={handleSubmit}>
-                <label class="c-order-form__label">
-                    First Name:
-                    <input
-                        class="c-order-form__input"
-                        type="text"
-                        name="firstName"
-                        required
-                        value={formData.firstName}
-                        onChange={handleInputChange}
-                    />
-                </label>
-                <label class="c-order-form__label">
-                    Last Name:
-                    <input
-                        class="c-order-form__input"
-                        type="text"
-                        name="surname"
-                        required
-                        value={formData.surname}
-                        onChange={handleInputChange}
-                    />
-                </label>
-                <label class="c-order-form__label">
-                    Email:
-                    <input
-                        class="c-order-form__input"
-                        type="email"
-                        name="email"
-                        required
-                        value={formData.email}
-                        onChange={handleInputChange}
-                    />
-                </label>
-                <button class="c-order-form__submit c-button" type="submit">Submit order</button>
-            </form>
+        <form class="c-order-form" onSubmit={handleSubmit}>
+            <label class="c-order-form__label">
+                First Name:
+                <input
+                    class="c-order-form__input"
+                    type="text"
+                    name="firstName"
+                    required
+                    value={formData.firstName}
+                    onChange={handleInputChange}
+                />
+            </label>
+            <label class="c-order-form__label">
+                Last Name:
+                <input
+                    class="c-order-form__input"
+                    type="text"
+                    name="surname"
+                    required
+                    value={formData.surname}
+                    onChange={handleInputChange}
+                />
+            </label>
+            <label class="c-order-form__label">
+                Email:
+                <input
+                    class="c-order-form__input"
+                    type="email"
+                    name="email"
+                    required
+                    value={formData.email}
+                    onChange={handleInputChange}
+                />
+            </label>
+            <button class="c-order-form__submit c-button" type="submit">Submit order</button>
+        </form>
     );
 }
 export default OrderForm;
