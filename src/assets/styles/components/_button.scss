@@ -13,3 +13,10 @@
         background-color: palette.$button-hover-color;
     }
 }
+
+.c-button--danger {
+    background-color: palette.$button-danger-color;
+        &:hover {
+        background-color: palette.$button-danger-hover-color;
+    }
+}

@@ -11,7 +11,7 @@ const Logout = () => {
   }, []);
 
   return (
-    <div class="c-logout">
+    <div class="c-logout o-container">
       <p class="c-logout__message">Logging out...</p>
     </div>
   );

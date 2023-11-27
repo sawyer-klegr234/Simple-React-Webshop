@@ -66,6 +66,9 @@ const products: Product[] = [
 ];
 
 const getRandomTimeoutDuration = () => {
+    //this is for testing, don't want to wait...
+    return 1;
+
     return Math.floor(Math.random() * 2500) + 500;
 }
 

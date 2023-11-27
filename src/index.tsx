@@ -10,6 +10,7 @@ import { AuthContextProvider, useAuth } from './infrastructure/authContext';
 import Loading from './components/loading';
 import { useState } from 'preact/hooks';
 import Toast from './components/toast';
+import Cart from './pages/cart';
 
 // Wrap routes so that we can use auth context
 const ActiveRoutes = () => {
@@ -19,7 +20,7 @@ const ActiveRoutes = () => {
 	const [currentInterval, setCurrentInterval] = useState<NodeJS.Timeout>();
 
 	const displayToast = (message: string) => {
-		if(currentInterval) {
+		if (currentInterval) {
 			clearInterval(currentInterval);
 		}
 
@@ -31,11 +32,18 @@ const ActiveRoutes = () => {
 		if (productSkusInCart.some(x => x === sku)) {
 			displayToast("Product already in cart");
 		} else {
-			displayToast("Added to cart!")
 			setProductSkusInCart(prevState => {
 				return [...prevState, sku];
 			});
+			displayToast("Added to cart!");
 		}
+	}
+
+	const onRemoveFromCart = (sku: string) => {
+		setProductSkusInCart(prevState => {
+			return [...prevState].filter(x => x !== sku);
+		});
+		displayToast("Removed from cart!")
 	}
 
 	return <>
@@ -46,9 +54,14 @@ const ActiveRoutes = () => {
 					<Routes>
 						<Route path="/logout" element={<Logout />} />
 						<Route path='/' element={<Home onAddToCart={onAddToCart} />} />
+						<Route path='/cart' element={
+							<Cart
+								productSkusInCart={productSkusInCart}
+								onRemoveFromCart={onRemoveFromCart} />
+						} />
 						<Route path='*' element={<NotFound />} />
 					</Routes>
-					<Toast message={toastMessage}  />
+					<Toast message={toastMessage} />
 				</>) :
 				(
 					<>
