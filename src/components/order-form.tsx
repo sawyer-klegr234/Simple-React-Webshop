@@ -1,5 +1,5 @@
 import { useState } from "preact/hooks";
-import { SubmitOrderFormData } from "../api/models/submitOrderFormData";
+import { Order } from "../api/models/order";
 import { useOrdersApi } from "../api/orders";
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 const OrderForm = (props: Props) => {
     const orderApi = useOrdersApi();
 
-    const [formData, setFormData] = useState<SubmitOrderFormData>({
+    const [formData, setFormData] = useState<Order>({
         firstName: '',
         surname: '',
         email: '',
@@ -25,7 +25,7 @@ const OrderForm = (props: Props) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const newOrder: SubmitOrderFormData = {
+        const newOrder: Order = {
             firstName: formData.firstName,
             surname: formData.surname,
             email: formData.email,

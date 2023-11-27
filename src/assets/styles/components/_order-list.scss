@@ -1,0 +1,41 @@
+@use '../abstracts/list';
+@use '../abstracts/grid';
+@use '../abstracts/palette';
+
+.c-orders-list {
+    @include list.unstyled;
+}
+
+.c-orders-list__item-heading {
+    margin-bottom: 4px;    
+}
+
+.c-orders-list__item-heading-message {
+    margin-bottom: 10px;
+}
+
+
+.c-orders-list__item {
+    display: flex;
+    flex-direction: column;
+}
+
+.c-orders-list__expand-button {
+    width: fit-content;
+    font-weight: bold;
+    margin-top: 8px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.c-orders-list__item-details {
+    margin-top: 4px;
+    display: flex;
+    flex-direction: column;
+}
+
+.c-orders-list__email-label,
+.c-orders-list__skus-label {
+    font-weight: bolder;
+}
+

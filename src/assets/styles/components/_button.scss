@@ -20,3 +20,9 @@
         background-color: palette.$button-danger-hover-color;
     }
 }
+
+.c-button--unstyled {
+    border: none;
+    background: none;
+    padding: 0;
+}

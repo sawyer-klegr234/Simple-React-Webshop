@@ -13,6 +13,7 @@ import Toast from './components/toast';
 import Cart from './pages/cart';
 import EditProductForm from './components/edit-product-form';
 import EditProduct from './pages/edit-product';
+import Orders from './pages/orders';
 
 const ActiveRoutes = () => {
 	const authContext = useAuth();
@@ -59,7 +60,10 @@ const ActiveRoutes = () => {
 						<Route path='*' element={<NotFound />} />
 
 						{authContext.isAdmin ?
+							<>
 							<Route path="/edit/:sku" element={<EditProduct />} />
+							<Route path="/orders" element={<Orders />} />
+							</>
 							:
 							<Route path='/cart' element={
 								<Cart

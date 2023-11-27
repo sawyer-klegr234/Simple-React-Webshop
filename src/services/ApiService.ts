@@ -1,5 +1,5 @@
 import { Product } from "../api/models/product";
-import { SubmitOrderFormData } from "../api/models/submitOrderFormData";
+import { Order } from "../api/models/order";
 
 const LOCAL_STORAGE_ORDERS_KEY = "orders";
 const LOCAL_STORAGE_PRODUCTS_KEY = "products";
@@ -86,9 +86,37 @@ const getRandomTimeoutDuration = () => {
 
 
 export class ApiService {
+    static getStoredOrders = () => {
+        const storedOrders = localStorage.getItem(LOCAL_STORAGE_ORDERS_KEY);
+        return storedOrders ? JSON.parse(storedOrders) : [];
+    }
+
+    static async submitOrder(order: Order): Promise<string> {
+        // Save order to local storage as we are not using a database
+        let orders = this.getStoredOrders();
+        orders.push(order);
+        localStorage.setItem(LOCAL_STORAGE_ORDERS_KEY, JSON.stringify(orders));
+
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve("Order submitted!");
+            }, getRandomTimeoutDuration());
+        });
+    }
+
+    static async getOrders(): Promise<Order[]> {
+        let orders = this.getStoredOrders();
+
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(orders);
+            }, getRandomTimeoutDuration());
+        });
+    }
+
     static getStoredProducts = () => {
         const storedProducts = localStorage.getItem(LOCAL_STORAGE_PRODUCTS_KEY);
-        return (storedProducts ? JSON.parse(storedProducts) : [])
+        return storedProducts ? JSON.parse(storedProducts) : [];
     }
 
     static async getProducts(): Promise<Product[]> {
@@ -97,21 +125,6 @@ export class ApiService {
         return new Promise((resolve) => {
             setTimeout(() => {
                 resolve(parsedProducts);
-            }, getRandomTimeoutDuration());
-        });
-    }
-
-    static async submitOrder(order: SubmitOrderFormData): Promise<string> {
-        // Save order to local storage as we are not using a database
-        const storedOrders = localStorage.getItem(LOCAL_STORAGE_ORDERS_KEY);
-
-        let orders = storedOrders ? JSON.parse(storedOrders) : [];
-        orders.push(order);
-        localStorage.setItem(LOCAL_STORAGE_ORDERS_KEY, JSON.stringify(orders));
-
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve("Order submitted!");
             }, getRandomTimeoutDuration());
         });
     }

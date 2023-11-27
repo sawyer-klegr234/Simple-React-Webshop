@@ -2,14 +2,19 @@
 // If it was a real api I would also implement better error handling of course, but the fake api is basically a
 // glorified function call, so it feels pretty pointless to do so
 import { ApiService } from "../services/ApiService";
-import { SubmitOrderFormData } from "./models/submitOrderFormData";
+import { Order } from "./models/order";
 
 export const useOrdersApi = () => {
-    const submitOrder = async (order: SubmitOrderFormData) => {
+    const submitOrder = async (order: Order) => {
         return await ApiService.submitOrder(order);
     }
 
+    const getOrders = async () => {
+        return await ApiService.getOrders();
+    }
+
     return {
-        submitOrder
+        submitOrder,
+        getOrders
     };
 };
