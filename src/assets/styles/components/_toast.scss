@@ -1,0 +1,22 @@
+@use '../abstracts/palette';
+
+.c-toast {
+    display: none;
+    position: fixed;
+    width: 100%;
+    bottom: 20px;
+    pointer-events: none;
+}
+
+.c-toast__message {
+    background: palette.$toast-background-color;
+    padding: 10px 20px;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 20px;
+}
+
+.c-toast--active {
+    display: flex;
+    justify-content: center;
+}

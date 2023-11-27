@@ -1,0 +1,15 @@
+@use '../abstracts/palette';
+
+.c-button {
+    padding: 8px 14px;
+    font-size: 20px;
+    background-color: palette.$button-color;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    transition: background-color 0.15s ease-in-out;
+
+    &:hover {
+        background-color: palette.$button-hover-color;
+    }
+}
