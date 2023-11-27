@@ -12,7 +12,6 @@ import { useState } from 'preact/hooks';
 import Toast from './components/toast';
 import Cart from './pages/cart';
 
-// Wrap routes so that we can use auth context
 const ActiveRoutes = () => {
 	const authContext = useAuth();
 	const [productSkusInCart, setProductSkusInCart] = useState<string[]>([]);
@@ -57,7 +56,8 @@ const ActiveRoutes = () => {
 						<Route path='/cart' element={
 							<Cart
 								productSkusInCart={productSkusInCart}
-								onRemoveFromCart={onRemoveFromCart} />
+								onRemoveFromCart={onRemoveFromCart}
+								emptyCart={() => setProductSkusInCart([])} />
 						} />
 						<Route path='*' element={<NotFound />} />
 					</Routes>
@@ -80,6 +80,7 @@ const App = () => {
 	return (
 		<BrowserRouter>
 			<AuthContextProvider>
+				{/* Wrap routes so that we can use auth context to display only some routes*/}
 				<ActiveRoutes />
 			</AuthContextProvider>
 		</BrowserRouter>

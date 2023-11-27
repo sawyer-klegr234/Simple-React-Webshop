@@ -6,6 +6,11 @@
 
 .c-header__nav {
     display: flex;
+    justify-content: space-between;
+}
+
+.c-header__primary-links {
+    display: flex;
 }
 
 .c-header__nav-link {

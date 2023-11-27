@@ -1,0 +1,37 @@
+@use '../abstracts/palette';
+@use '../abstracts/grid';
+
+
+.c-order-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+
+    @include grid.breakpoint(md) {
+        width: 50%;
+    }
+
+    @include grid.breakpoint(xl) {
+        width: 33%;
+    }
+}
+
+.c-order-form__label {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    font-weight: bold;
+}
+
+.c-order-form__input {
+    padding: 6px;
+    border: 1px solid palette.$gray-border;
+    border-radius: 8px;;
+}
+
+.c-order-form__submit {
+    width: fit-content;
+    margin-left: auto;
+}

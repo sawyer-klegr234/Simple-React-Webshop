@@ -1,4 +1,7 @@
 import { Product } from "../api/models/product";
+import { FormData } from "../api/models/formData";
+
+const LOCAL_STORAGE_ORDERS_KEY = "orders";
 
 // I am assuming that sku is always unique, otherwise I would add a unique ID as well
 const products: Product[] = [
@@ -66,9 +69,6 @@ const products: Product[] = [
 ];
 
 const getRandomTimeoutDuration = () => {
-    //this is for testing, don't want to wait...
-    return 1;
-
     return Math.floor(Math.random() * 2500) + 500;
 }
 
@@ -77,6 +77,21 @@ export class ProductService {
         return new Promise((resolve) => {
             setTimeout(() => {
                 resolve(products);
+            }, getRandomTimeoutDuration());
+        });
+    }
+
+    static async submitOrder(order: FormData): Promise<string> {
+        // Save order to local storage as we are not using a database
+        const storedOrders = localStorage.getItem(LOCAL_STORAGE_ORDERS_KEY);
+
+        let orders = storedOrders ? JSON.parse(storedOrders) : [];
+        orders.push(order);
+        localStorage.setItem(LOCAL_STORAGE_ORDERS_KEY, JSON.stringify(orders));
+
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve("Order submitted!");
             }, getRandomTimeoutDuration());
         });
     }
