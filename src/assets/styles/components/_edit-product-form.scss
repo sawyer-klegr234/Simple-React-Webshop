@@ -35,13 +35,20 @@
 .c-edit-product-form__price-container {
     display: flex;
     align-items: center;
-
 }
 
 .c-edit-product-form__price-symbol {
     justify-self: flex-end;
     font-weight: normal;
     margin-right: 4px;
+}
+
+.c-edit-product-form__validation {
+    font-size: 12px;
+    width: 100%;
+    text-align: end;
+    color: palette.$button-danger-color;
+    margin-bottom: 16px;
 }
 
 .c-edit-product-form__description {

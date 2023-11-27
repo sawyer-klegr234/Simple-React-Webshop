@@ -12,6 +12,7 @@ interface Props {
 const EditProductForm = (props: Props) => {
     const { sku } = useParams();
     const [isLoading, setIsLoading] = useState(true);
+    const [showValidationMessage, setShowValidationMessage] = useState(false);
     const navigate = useNavigate();
 
     const [updatedProduct, setUpdateProduct] = useState<Product>({
@@ -40,8 +41,14 @@ const EditProductForm = (props: Props) => {
     };
 
     const handleSubmit = async (event) => {
-        setIsLoading(true);
         event.preventDefault();
+
+        if (isNaN(updatedProduct.price)) {
+            setShowValidationMessage(true);
+            return;
+        }
+
+        setIsLoading(true);
 
         // Would check status/catch errors if this was a real api
         const response = await productsApi.updateProduct(sku, updatedProduct);
@@ -92,6 +99,11 @@ const EditProductForm = (props: Props) => {
                             />
                         </div>
                     </label>
+                    {showValidationMessage &&
+                        <div class="c-edit-product-form__validation">
+                            Please enter a valid price
+                        </div>
+                    }
                     <label class="c-edit-product-form__label">
                         Description:
                         <textarea

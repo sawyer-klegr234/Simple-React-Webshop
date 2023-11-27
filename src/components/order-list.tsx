@@ -43,6 +43,10 @@ const OrderList = (props: Props) => {
                     <h2 class="c-orders-list__item-heading">Orders:</h2>
                     <div class="c-orders-list__item-heading-message">(click to view order details)</div>
                 </li>
+                {props.orders.length == 0 &&
+                    <div class="c-orders-list__no-orders">No orders found.</div>
+                }
+
                 {props.orders.map((o, i) =>
                     <li class="c-orders-list__item">
                         <button class="c-orders-list__expand-button c-button--unstyled" onClick={() => onExpandOrder(i)}>

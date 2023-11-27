@@ -16,6 +16,9 @@ The doc says under the "Admin" section "List carts of customers" and "View the d
 #### Notes about config
 I have only setup a dev script for the time being as it is adequate to launch and test the web app. To be able to login, the app must be running on 127.0.0.1:5173 as that is the address I used to configure auth0 (there is a custom flow to add the user roles to the id token, as rules are being phased out) as well as vite. Obviously if this was to be used in production you would not set it up like this, but for a web app running locally this works totally fine.
 
+### Testing
+Run `npx jest` from the root folder to run jest tests
+
 ### Troubleshooting
 Normally this section would have a little more general instruction, but seeing as it is such a small program, basically the only thing that is likely to have issues is authentication, so I will add quite detailed stuff about auth here ;) You should just be able to use a existing user and not have to mess around with any auth0 stuff if it is running on 127.0.0.1:5173 though. 
 

@@ -1,8 +1,8 @@
 import { Product } from "../api/models/product";
 import { Order } from "../api/models/order";
 
-const LOCAL_STORAGE_ORDERS_KEY = "orders";
-const LOCAL_STORAGE_PRODUCTS_KEY = "products";
+export const LOCAL_STORAGE_ORDERS_KEY = "orders";
+export const LOCAL_STORAGE_PRODUCTS_KEY = "products";
 
 // I am assuming that sku is always unique, otherwise I would add a unique ID as well
 const products: Product[] = [
@@ -126,7 +126,6 @@ export class ApiService {
     }
 
     static async getProductBySku(sku: string): Promise<Product> {
-        // Save order to local storage as we are not using a database
         const parsedProducts = this.getStoredProducts();
         const product = parsedProducts.find(p => p.sku === sku);
 
@@ -138,7 +137,6 @@ export class ApiService {
     }
     
     static async updateProduct(sku: string, product: Product): Promise<Product> {
-        // Save order to local storage as we are not using a database
         const parsedProducts = this.getStoredProducts();
 
         const indexOfItemToUpdate = parsedProducts.findIndex(p => p.sku === sku);
