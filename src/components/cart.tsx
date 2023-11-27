@@ -1,5 +1,5 @@
 import { useState } from "preact/hooks";
-import OrderForm from "../components/order-form";
+import OrderForm from "./order-form";
 
 interface Props {
 	productSkusInCart: string[];

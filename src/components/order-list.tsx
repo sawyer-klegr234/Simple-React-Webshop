@@ -20,37 +20,40 @@ const OrderList = () => {
     }, []);
 
     const onExpandOrder = (index: number) => {
-        if (index !== expanded){
+        if (index !== expanded) {
             setExpanded(index);
-        } else{
+        } else {
             setExpanded(null);
         }
     }
 
-    return orders ?
-        <ul class="c-orders-list">
-            <li class="c-orders-list__item">
-                <h2 class="c-orders-list__item-heading">Orders:</h2>
-                <div class="c-orders-list__item-heading-message">(click to toggle all details)</div>
-            </li>
-            {orders.map((o, i) =>
+    return <div class="c-orders-list o-container">
+        {orders ?
+            <ul class="c-orders-list__list">
                 <li class="c-orders-list__item">
-                    <button class="c-orders-list__expand-button c-button--unstyled" onClick={() => onExpandOrder(i)}>
-                        {o.firstName} {o.surname}
-                    </button>
-                    {expanded == i &&
-                        <div class="c-orders-list__item-details">
-                            <label class="c-orders-list__email-label">Email:</label>
-                            <a class="c-orders-list__email" href={`mailto:${o.email}`}>{o.email}</a>
-                            <label class="c-orders-list__skus-label">Skus:</label>
-                            <div class="c-orders-list__skus">{o.skus.join(", ")}</div>
-                        </div>
-                    }
+                    <h2 class="c-orders-list__item-heading">Orders:</h2>
+                    <div class="c-orders-list__item-heading-message">(click to toggle all details)</div>
                 </li>
-            )}
-        </ul>
-        :
-        <Loading />
+                {orders.map((o, i) =>
+                    <li class="c-orders-list__item">
+                        <button class="c-orders-list__expand-button c-button--unstyled" onClick={() => onExpandOrder(i)}>
+                            {o.firstName} {o.surname}
+                        </button>
+                        {expanded == i &&
+                            <div class="c-orders-list__item-details">
+                                <label class="c-orders-list__email-label">Email:</label>
+                                <a class="c-orders-list__email" href={`mailto:${o.email}`}>{o.email}</a>
+                                <label class="c-orders-list__skus-label">Skus:</label>
+                                <div class="c-orders-list__skus">{o.skus.join(", ")}</div>
+                            </div>
+                        }
+                    </li>
+                )}
+            </ul>
+            :
+            <Loading />
+        }
+    </div>
 }
 
 export default OrderList;

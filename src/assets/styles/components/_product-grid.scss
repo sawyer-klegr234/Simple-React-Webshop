@@ -2,7 +2,7 @@
 @use '../abstracts/grid';
 @use '../abstracts/palette';
 
-.c-product-grid {
+.c-product-grid__grid {
     @include list.unstyled;
     display: flex;
     flex-wrap: wrap;

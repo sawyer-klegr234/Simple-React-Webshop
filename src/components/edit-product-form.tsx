@@ -45,12 +45,12 @@ const EditProductForm = () => {
         navigate("../");
     };
 
-    return (
-        sku ? (
+    return <div class="c-edit-product-form o-container">
+        {sku ? (
             isLoading ?
                 <Loading />
                 :
-                <form class="c-edit-product-form" onSubmit={handleSubmit}>
+                <form class="c-edit-product-form__form" onSubmit={handleSubmit}>
                     <label class="c-edit-product-form__label">
                         Sku:
                         <input
@@ -104,7 +104,9 @@ const EditProductForm = () => {
             <div class="c-edit-product-form__no-sku">
                 No Sku was provided. Please return to the <a class="c-edit-product-form__submitted-link" href="/">home page.</a>
             </div>
-    );
+        }
+    </div>
+
 }
 
 export default EditProductForm;

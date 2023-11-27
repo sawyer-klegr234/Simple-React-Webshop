@@ -2,7 +2,7 @@
 @use '../abstracts/grid';
 @use '../abstracts/palette';
 
-.c-orders-list {
+.c-orders-list__list {
     @include list.unstyled;
 }
 

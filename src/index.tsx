@@ -1,19 +1,18 @@
 import { render } from 'preact';
-import './assets/styles/main.scss';
 import Login from './pages/login';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Logout from './pages/logout';
 import Header from './components/header';
 import NotFound from './pages/not-found';
-import Home from './pages/home';
 import { AuthContextProvider, useAuth } from './infrastructure/authContext';
 import Loading from './components/loading';
 import { useState } from 'preact/hooks';
 import Toast from './components/toast';
-import Cart from './pages/cart';
+import Cart from './components/cart';
+import ProductGrid from './components/product-grid';
 import EditProductForm from './components/edit-product-form';
-import EditProduct from './pages/edit-product';
-import Orders from './pages/orders';
+import OrderList from './components/order-list';
+import './assets/styles/main.scss';
 
 const ActiveRoutes = () => {
 	const authContext = useAuth();
@@ -55,14 +54,14 @@ const ActiveRoutes = () => {
 				(<>
 					<Routes>
 						<Route path="/logout" element={<Logout />} />
-						<Route path='/' element={<Home onAddToCart={onAddToCart} />} />
+						<Route path='/' element={<ProductGrid onAddToCart={onAddToCart} />} />
 
 						<Route path='*' element={<NotFound />} />
 
 						{authContext.isAdmin ?
 							<>
-							<Route path="/edit/:sku" element={<EditProduct />} />
-							<Route path="/orders" element={<Orders />} />
+							<Route path="/edit/:sku" element={<EditProductForm />} />
+							<Route path="/orders" element={<OrderList />} />
 							</>
 							:
 							<Route path='/cart' element={
